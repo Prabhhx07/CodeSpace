@@ -6,3 +6,5 @@ git status => to track files in dir;
 git add => adds change in working dir to staging area;
 git commit -m "" =>commit changes with a msg;
 git log => shows all the commits,exit using 'q';
+git diff file_name => shows diff in file;
+git checkout file_name =>revert backs to last version created in locacl repository;
