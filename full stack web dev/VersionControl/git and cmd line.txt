@@ -1,0 +1,8 @@
+code (filename)=>to open file;
+git init=> to intialise .git file in repository;
+ls=>to list files;
+ls-a => to list all files including hidden;
+git status => to track files in dir;
+git add => adds change in working dir to staging area;
+git commit -m "" =>commit changes with a msg;
+git log => shows all the commits,exit using 'q';
