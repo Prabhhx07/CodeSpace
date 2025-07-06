@@ -10,4 +10,4 @@ git log => shows all the commits,exit using 'q';
 git diff file_name => shows diff in file;
 git checkout file_name =>revert backs to last version created in locacl repository;
 git branch branch_name =>adds a branch;
-git merge file_name => merges branch;
+git merge branch_name => merges branch;
