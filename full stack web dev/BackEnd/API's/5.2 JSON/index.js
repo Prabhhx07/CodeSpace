@@ -35,6 +35,8 @@ app.post("/recipe", (req, res) => {
       break;
   }
   res.redirect("/");
+  // or you can use res.render("index.ejs", { recipe: data }); instead of res.redirect but that will cause 
+  // duplicate rendering and code wont be efficient but it would still work
 });
 
 app.listen(port, () => {
