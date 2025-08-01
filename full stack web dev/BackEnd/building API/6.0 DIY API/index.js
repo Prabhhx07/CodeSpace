@@ -35,6 +35,16 @@ app.get(
 );
 
 //4. POST a new joke
+app.post("/jokes", (req, res) => {
+  const newJoke = {
+    id: jokes.length + 1,
+    joketext: req.body.text,
+    joketype: req.body.type,
+  };
+  jokes.push(newJoke);
+  console.log(jokes.slice(-1));
+  res.json(newJoke);
+});
 
 //5. PUT a joke
 
