@@ -60,10 +60,44 @@ app.put("/jokes/:id", (req, res) => {
 });
 
 //6. PATCH a joke
+app.patch("/jokes/:id", (req, res) => {
+  const id = parseint(req.params.id);
+  const existingJoke = joke.find((joke) => joke.id === id);
+  const replacementJoke = {
+    id: id,
+    jokeText: req.body.text || existingJoke.jokeText,
+    jokeType: req.body.type || existingJoke.jokeType,
+  };
+  const searchindex = jokes.findIndex((joke) => joke.id === id);
+  jokes[searchindex] = replacementJoke;
+  console.log(jokes[searchindex]);
+  res.json(replacementJoke);
+});
 
 //7. DELETE Specific joke
+app.delete("/jokes/:id", (req, res) => {
+  const id = parseint(req.params.id);
+  const searchindex = joke.find((joke) => joke.id === id);
+  if (searchindex > -1) {
+    jokes.splice(searchindex, 1);
+    res.sendStatus(200);
+  } else {
+    res
+      .status(404)
+      .json({ error: `joke with id:${id} not found,no jokes were deleted ` });
+  }
+});
 
 //8. DELETE All jokes
+app.delete("all", (req, res) => {
+  const userKey = req.query.key;
+  if (userKey === masterKey) {
+    jokes = [];
+    res.sendStatus(200);
+  } else {
+    res.status(404).json({ error: `you are not authorised to do this action` });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
