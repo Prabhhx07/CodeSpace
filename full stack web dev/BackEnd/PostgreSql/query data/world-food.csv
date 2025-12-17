@@ -8,3 +8,7 @@ Iran,1.60,10.1
 Pakistan,13.98,27.5
 Ukraine,0.05,32.2
 United States,8.70,44.8
+
+/* Select column from table
+where column like  value || '%'
+*/
