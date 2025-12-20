@@ -19,6 +19,10 @@ SELECT column1, column2, ...
 FROM table_name
 WHERE condition;
 
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition LIKE '%'||'$';
+
 UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
