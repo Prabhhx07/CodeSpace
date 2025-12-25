@@ -5,7 +5,7 @@ import pg from "pg";
 const app = express();
 const port = 3000;
 
-const db= new pg.Client({
+const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "permalist",
@@ -17,13 +17,8 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// let items = [
-//   { id: 1, title: "Buy milk" },
-//   { id: 2, title: "Finish homework" },
-// ];
-
 app.get("/", async (req, res) => {
-  const result = await db.query("SELECT * FROM items;");
+  const result = await db.query("SELECT * FROM items order by id asc;");
   res.render("index.ejs", {
     listTitle: "Today",
     listItems: result.rows,
@@ -36,9 +31,21 @@ app.post("/add", async (req, res) => {
   res.redirect("/");
 });
 
-app.post("/edit", (req, res) => {});
+app.post("/edit", async (req, res) => {
+  const editTitle = req.body.updatedItemTitle;
+  const editId = req.body.updatedItemId;
+  await db.query("update items set title = $1 where id = $2;", [
+    editTitle,
+    editId,
+  ]);
+  res.redirect("/");
+});
 
-app.post("/delete", (req, res) => {});
+app.post("/delete", async (req, res) => {
+  const deleteItem = req.body.deleteItemId;
+  await db.query("DELETE FROM items WHERE id = $1;", [deleteItem]);
+  res.redirect("/");
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
